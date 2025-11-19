@@ -4,6 +4,7 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { join } from 'path';
 import { AttendanceReportModule } from './attendance-report/attendance-report.module';
 import { PrismaModule } from './prisma/prisma.module';
+import { CompetitionReportModule } from './competition-report/competition-report.module';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { PrismaModule } from './prisma/prisma.module';
     }),
     AttendanceReportModule,
     PrismaModule,
+    CompetitionReportModule,
   ],
   controllers: [],
   providers: [],
