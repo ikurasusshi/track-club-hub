@@ -14,16 +14,17 @@ datasource db {
 }
 
 model User {
-  id Int @id @default(autoincrement())
-  name String @db.VarChar(255)
-  email String @unique @db.VarChar(255)
-  password String @db.VarChar(255)
-  block Block
-  createdAt DateTime @default(now()) @db.Timestamp(0)
-  updatedAt DateTime @updatedAt @db.Timestamp(0)
-  AttendanceReports AttendanceReports[]
-  CompetitionReports CompetitionReports[]
+  id                 Int                 @id @default(autoincrement())
+  name               String              @db.VarChar(255)
+  email              String              @unique @db.VarChar(255)
+  password           String              @db.VarChar(255)
+  block              Block
+  createdAt          DateTime            @default(now()) @db.Timestamp(0)
+  updatedAt          DateTime            @updatedAt @db.Timestamp(0)
+  attendanceReports  AttendanceReport[]
+  competitionReports CompetitionReport[]
 
+  isDeleted Boolean @default(false)
 }
 
 enum Block {
@@ -31,17 +32,22 @@ enum Block {
   MiddleAndLongDistance
   Jumps
   Throws
+  Others
 }
 
-model AttendanceReports {
-  id Int @id @default(autoincrement())
-  date DateTime
-  status Status
-  reason String
+model AttendanceReport {
+  id        Int      @id @default(autoincrement())
+  // @db.Textにより「2025-11-20」のような表示になる
+  date      DateTime @db.Date
+  status    Status
+  reason    String?
   createdAt DateTime @default(now()) @db.Timestamp(0)
   updatedAt DateTime @updatedAt @db.Timestamp(0)
-  userId Int
-  user User @relation(fields: [userId], references: [id])
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id])
+
+  // userIdとdateが重複しないようにする
+  @@unique([userId, date])
 }
 
 enum Status {
@@ -49,11 +55,11 @@ enum Status {
   LATE
 }
 
-model CompetitionReports {
-  id Int @id @default(autoincrement())
-  body String
+model CompetitionReport {
+  id        Int      @id @default(autoincrement())
+  body      String   @db.Text
   createdAt DateTime @default(now()) @db.Timestamp(0)
   updatedAt DateTime @updatedAt @db.Timestamp(0)
-  userId Int
-  user User @relation(fields: [userId], references: [id])
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id])
 }
