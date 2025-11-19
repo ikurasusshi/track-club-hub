@@ -1,6 +1,6 @@
 import { Field, InputType, Int } from '@nestjs/graphql';
 import { Status } from '@prisma/client';
-import { IsEnum } from 'class-validator';
+import { IsEnum, IsNotEmpty } from 'class-validator';
 
 @InputType()
 export class CreateAttendanceReportInput {
@@ -9,6 +9,7 @@ export class CreateAttendanceReportInput {
 
   @Field()
   @IsEnum(Status)
+  @IsNotEmpty()
   status: Status;
 
   @Field({ nullable: true })
