@@ -5,6 +5,7 @@ import { join } from 'path';
 import { AttendanceReportModule } from './attendance-report/attendance-report.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { CompetitionReportModule } from './competition-report/competition-report.module';
+import { UserModule } from './user/user.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { CompetitionReportModule } from './competition-report/competition-report
     AttendanceReportModule,
     PrismaModule,
     CompetitionReportModule,
+    UserModule,
   ],
   controllers: [],
   providers: [],
