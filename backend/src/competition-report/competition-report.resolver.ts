@@ -12,12 +12,12 @@ export class CompetitionReportResolver {
   ) {}
 
   @Query(() => [CompetitionReportModel])
-  async getCompetitionReport(): Promise<CompetitionReport[]> {
+  async getCompetitionReports(): Promise<CompetitionReport[]> {
     return await this.competitionReportService.getCompetitionReports();
   }
 
   @Query(() => [CompetitionReportModel])
-  async getMyCompetitionReport(
+  async getMyCompetitionReports(
     @Args('userId', { type: () => Int }) userId: number,
   ): Promise<CompetitionReport[]> {
     return await this.competitionReportService.getMyCompetitionReports(userId);

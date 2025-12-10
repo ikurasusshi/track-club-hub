@@ -6,6 +6,7 @@ import { AttendanceReportModule } from './attendance-report/attendance-report.mo
 import { PrismaModule } from './prisma/prisma.module';
 import { CompetitionReportModule } from './competition-report/competition-report.module';
 import { UserModule } from './user/user.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { UserModule } from './user/user.module';
     PrismaModule,
     CompetitionReportModule,
     UserModule,
+    AuthModule,
   ],
   controllers: [],
   providers: [],
