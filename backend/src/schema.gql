@@ -32,10 +32,15 @@ type User {
   updatedAt: DateTime!
 }
 
+type SignInReponse {
+  accessToken: String!
+  user: User!
+}
+
 type Query {
   getAttendanceReports: [AttendanceReport!]!
-  getCompetitionReport: [CompetitionReport!]!
-  getMyCompetitionReport(userId: Int!): [CompetitionReport!]!
+  getCompetitionReports: [CompetitionReport!]!
+  getMyCompetitionReports(userId: Int!): [CompetitionReport!]!
   getUser(email: String!): User
 }
 
@@ -44,6 +49,7 @@ type Mutation {
   createCompetitionReport(createCompetitionReportInput: CreateCompetitionReportInput!): CompetitionReport!
   updateCompetitionReport(updateCompetitionReportInput: UpdateCompetitionReportInput!): CompetitionReport!
   createUser(createUserInput: CreateUserInput!): User!
+  signIn(signInInput: SignInInput!): SignInReponse!
 }
 
 input CreateAttendanceReportInput {
@@ -68,4 +74,9 @@ input CreateUserInput {
   email: String!
   password: String!
   block: String!
+}
+
+input SignInInput {
+  email: String!
+  password: String!
 }
