@@ -1,6 +1,6 @@
 const Main = () => {
     return (
-        <div className="text-3xl">Main</div>
+        <div>Main</div>
     )
 }
 export default Main;
