@@ -8,10 +8,12 @@ import { BrowserRouter, Routes, Route } from "react-router";
 import DefaultLayout from "./components/layout/DefaultLayout";
 import NoHeaderLayout from "./components/layout/NoHeaderLayout";
 import UsersList from "./components/users/UsersList";
+import client from "./apolloClient";
+import { ApolloProvider } from "@apollo/client/react";
 
 function App() {
   return (
-    <div className="bg-orange-100">
+    <ApolloProvider client={client}>
       <BrowserRouter>
         <Routes>
           <Route element={<DefaultLayout />}>
@@ -26,7 +28,7 @@ function App() {
           </Route>
         </Routes>
       </BrowserRouter>
-    </div>
+    </ApolloProvider>
   );
 }
 
