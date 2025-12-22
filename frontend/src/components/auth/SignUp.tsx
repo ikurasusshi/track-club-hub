@@ -4,7 +4,7 @@ import { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const CREATE_USER = gql`
-  mutation CreateUser($createUserInput: CreateUserInput!) {
+  mutation createUser($createUserInput: CreateUserInput!) {
     createUser(createUserInput: $createUserInput) {
       id
       name
@@ -15,11 +15,11 @@ const CREATE_USER = gql`
 `;
 
 const BLOCKS = [
-  "SPRINTS",
-  "MIDDLE_AND_LONG_DISTANCE",
-  "JUMPS",
-  "THROWS",
-  "OTHER",
+  "Sprints",
+  "MiddleAndLongDistance",
+  "Jumps",
+  "Throws",
+  "Others",
 ] as const;
 
 type Block = (typeof BLOCKS)[number];
@@ -34,7 +34,7 @@ type CreateUserDate = {
 };
 
 type CreateUserVars = {
-  input: {
+  createUserInput: {
     name: string;
     email: string;
     password: string;
@@ -46,7 +46,7 @@ const SignUp: React.FC = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [block, setBlock] = useState<Block>("SPRINTS");
+  const [block, setBlock] = useState<Block>("Sprints");
 
   const navigate = useNavigate();
 
@@ -55,7 +55,7 @@ const SignUp: React.FC = () => {
     CreateUserVars
   >(CREATE_USER, {
     onCompleted: () => {
-      navigate("./signin");
+      navigate("./../signin");
     },
   });
 
@@ -71,9 +71,10 @@ const SignUp: React.FC = () => {
     e.preventDefault();
     if (!canSubmit) return;
 
+    // mutationを実行し、サーバーにデータを送る
     await createUser({
       variables: {
-        input: {
+        createUserInput: {
           name: name.trim(),
           email: email.trim().toLowerCase(),
           password,
