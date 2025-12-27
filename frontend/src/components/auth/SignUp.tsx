@@ -1,18 +1,9 @@
-import { gql } from "@apollo/client";
 import { useMutation } from "@apollo/client/react";
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
-const CREATE_USER = gql`
-  mutation createUser($createUserInput: CreateUserInput!) {
-    createUser(createUserInput: $createUserInput) {
-      id
-      name
-      email
-      block
-    }
-  }
-`;
+import type { User } from "../../types/user";
+import { SIGN_IN, SIGN_UP } from "../../mutations/authMutations";
+import type { SignInResponse } from "../../types/signInResponse";
 
 const BLOCKS = [
   "Sprints",
@@ -24,70 +15,42 @@ const BLOCKS = [
 
 type Block = (typeof BLOCKS)[number];
 
-type CreateUserDate = {
-  createUser: {
-    id: string;
-    name: string;
-    email: string;
-    block: Block;
-  };
-};
-
-type CreateUserVars = {
-  createUserInput: {
-    name: string;
-    email: string;
-    password: string;
-    block: Block;
-  };
-};
-
 const SignUp: React.FC = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [block, setBlock] = useState<Block>("Sprints");
-
+  const [signUp] = useMutation<{ createUser: User }>(SIGN_UP);
+  const [signIn] = useMutation<SignInResponse>(SIGN_IN);
   const navigate = useNavigate();
 
-  const [createUser, { loading, error, data }] = useMutation<
-    CreateUserDate,
-    CreateUserVars
-  >(CREATE_USER, {
-    onCompleted: () => {
-      navigate("./../signin");
-    },
-  });
-
-  const canSubmit = useMemo(() => {
-    if (!name.trim()) return false;
-    if (!email.trim()) return false;
-    if (password.length < 8) return false;
-    if (!block) return false;
-    return true;
-  }, [name, email, password, block]);
-
-  const onSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!canSubmit) return;
-
-    // mutationを実行し、サーバーにデータを送る
-    await createUser({
-      variables: {
-        createUserInput: {
-          name: name.trim(),
-          email: email.trim().toLowerCase(),
-          password,
-          block,
-        },
-      },
-    });
+    const signUpInput = { name, email, password, block };
+    try {
+      const result = await signUp({
+        variables: { createUserInput: signUpInput },
+      });
+      if (result.data?.createUser) {
+        const signInInput = { email, password };
+        const result = await signIn({
+          variables: { signInInput },
+        });
+        if (result.data) {
+          localStorage.setItem("token", result.data.signIn.accessToken);
+        }
+        localStorage.getItem("token") && navigate("/");
+      }
+    } catch (err: any) {
+      alert("ユーザの作成に失敗しました。");
+      return;
+    }
   };
 
   return (
     <div>
       <form
-        onSubmit={onSubmit}
+        onSubmit={handleSubmit}
         className="mx-auto grid w-full max-w-md gap-4 rounded-2xl border border-gray-200 bg-white p-6 shadow-sm"
       >
         <h2 className="text-xl font-bold text-gray-900">新規登録</h2>
@@ -145,23 +108,11 @@ const SignUp: React.FC = () => {
             ))}
           </select>
         </label>
-        {error && (
-          <p className="rounded-lg border border-rose-200 bg-rose-50 px-3 py-2 text-sm text-rose-700">
-            登録に失敗しました: {error.message}
-          </p>
-        )}
-
-        {data && (
-          <p className="rounded-lg border border-emerald-200 bg-emerald-50 px-3 py-2 text-sm text-emerald-700">
-            登録完了: {data.createUser.name} ({data.createUser.block})
-          </p>
-        )}
         <button
           type="submit"
-          disabled={!canSubmit || loading}
           className="mt-1 inline-flex h-11 items-center justify-center rounded-lg bg-gray-900 px-4 text-sm font-semibold text-white shadow-sm transition hover:bg-gray-800 disabled:cursor-not-allowed disabled:opacity-50"
         >
-          {loading ? "登録中..." : "登録する"}
+          登録
         </button>
       </form>
     </div>
