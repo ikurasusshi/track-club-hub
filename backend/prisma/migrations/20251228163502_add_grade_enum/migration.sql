@@ -1,0 +1,5 @@
+-- CreateEnum
+CREATE TYPE "Grade" AS ENUM ('FIRST', 'SECOND', 'THIRD', 'FOURTH', 'GRADUATE_STUDENT');
+
+-- AlterTable
+ALTER TABLE "User" ADD COLUMN     "grade" "Grade" NOT NULL DEFAULT 'FIRST';
