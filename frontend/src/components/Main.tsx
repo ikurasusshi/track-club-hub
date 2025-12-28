@@ -9,7 +9,7 @@ const Main = () => {
   const [activeTab, setActiveTab] = useState<TabTypes>("基本情報");
   return (
     <div className="">
-      <div className="space-x-6 border-b-[0.5px] border-slate-700">
+      <div className="bg-white dark:bg-darkTheme space-x-6 border-b-[0.5px] border-slate-700">
         <button
           className={`ml-43 font-bold mr-15 pb-3 ${
             activeTab === "基本情報"
@@ -18,7 +18,7 @@ const Main = () => {
           }`}
           onClick={() => setActiveTab("基本情報")}
         >
-          Info
+          基本情報
         </button>
         <button
           className={`font-bold mr-15 pb-3 ${
@@ -28,7 +28,7 @@ const Main = () => {
           }`}
           onClick={() => setActiveTab("欠席連絡")}
         >
-          Absence
+          欠席連絡
         </button>
         <button
           className={`font-bold pb-3 ${
@@ -38,7 +38,7 @@ const Main = () => {
           }`}
           onClick={() => setActiveTab("試合報告")}
         >
-          Reports
+          試合報告
         </button>
       </div>
       <div className="mt-6">

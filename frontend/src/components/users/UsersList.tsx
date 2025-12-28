@@ -1,17 +1,17 @@
 import { useQuery } from "@apollo/client/react";
+import { useState } from "react";
 import { GET_USERS } from "../../queries/userQueries";
 import type { User } from "../../types/user";
-import { Link } from "react-router-dom";
+import JumpsMemberTab from "./blockMember/JumpsMemberTab";
+import MiddleAndLongDistanceMemberTab from "./blockMember/MiddleAndLongDistanceMemberTab";
+import OthersMemberTab from "./blockMember/OthersMemberTab";
+import SprintsMemberTab from "./blockMember/SprintsMemberTab";
+import ThrowsMemberTab from "./blockMember/ThrowsMemberTab";
 
-const BLOCKS = [
-  { key: "Sprints", label: "短距離" },
-  { key: "MiddleAndLongDistance", label: "中長距離" },
-  { key: "Jumps", label: "跳躍" },
-  { key: "Throws", label: "投擲" },
-  { key: "Others", label: "その他" },
-] as const;
+type TabTypes = "短距離" | "中距離" | "跳躍" | "投擲" | "その他";
 
 const UsersList = () => {
+  const [activeTab, setActiveTab] = useState<TabTypes>("短距離");
   const { loading, error, data } = useQuery<{ getUsers: User[] }>(GET_USERS);
 
   if (loading) {
@@ -34,51 +34,91 @@ const UsersList = () => {
 
   const users = data?.getUsers || [];
 
-  // ブロックごとにユーザーをグループ化
-  const usersByBlock = BLOCKS.map((block) => ({
-    ...block,
-    users: users.filter((user: User) => user.block === block.key),
-  }));
-
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="mb-8 text-3xl font-bold">部員一覧</h1>
-      <div className="space-y-8">
-        {usersByBlock.map((block) => (
-          <div
-            key={block.key}
-            className="rounded-lg border bg-white p-6 shadow-sm dark:bg-gray-800 dark:border-gray-700"
+    <div>
+      <div className="">
+        <div className="bg-white dark:bg-darkTheme space-x-6 border-b-[0.5px] border-slate-700">
+          <h1 className="font-bold text-3xl my-3">部員一覧</h1>
+          <button
+            className={`ml-43 font-bold mr-15 pb-3 ${
+              activeTab === "短距離"
+                ? "text-black dark:text-white border-b-[1.5px] border-black dark:border-white"
+                : "text-slate-400 dark:text-slate-500"
+            }`}
+            onClick={() => setActiveTab("短距離")}
           >
-            <h2 className="mb-4 text-xl font-semibold text-gray-900 dark:text-white">
-              {block.label}
-              <span className="ml-2 text-sm font-normal text-gray-500 dark:text-gray-400">
-                ({block.users.length}名)
-              </span>
-            </h2>
-            {block.users.length === 0 ? (
-              <p className="text-gray-500 dark:text-gray-400">
-                該当する部員はいません
-              </p>
-            ) : (
-              <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-                {block.users.map((user) => (
-                  <Link
-                    key={user.id}
-                    to={`/users/${user.id}`}
-                    className="rounded-lg border border-gray-200 bg-gray-50 p-4 transition hover:bg-gray-100 dark:border-gray-600 dark:bg-gray-700 dark:hover:bg-gray-600"
-                  >
-                    <div className="font-medium text-gray-900 dark:text-white">
-                      {user.name}
-                    </div>
-                    <div className="text-sm text-gray-500 dark:text-gray-400">
-                      {user.email}
-                    </div>
-                  </Link>
-                ))}
-              </div>
-            )}
-          </div>
-        ))}
+            短距離
+          </button>
+          <button
+            className={`font-bold mr-15 pb-3 ${
+              activeTab === "中距離"
+                ? "text-black dark:text-white border-b-[1.5px] border-black dark:border-white"
+                : "text-slate-400 dark:text-slate-500"
+            }`}
+            onClick={() => setActiveTab("中距離")}
+          >
+            中距離
+          </button>
+          <button
+            className={`font-bold mr-15 pb-3 ${
+              activeTab === "跳躍"
+                ? "text-black dark:text-white border-b-[1.5px] border-black dark:border-white"
+                : "text-slate-400 dark:text-slate-500"
+            }`}
+            onClick={() => setActiveTab("跳躍")}
+          >
+            跳躍
+          </button>
+          <button
+            className={`font-bold mr-15 pb-3 ${
+              activeTab === "投擲"
+                ? "text-black dark:text-white border-b-[1.5px] border-black dark:border-white"
+                : "text-slate-400 dark:text-slate-500"
+            }`}
+            onClick={() => setActiveTab("投擲")}
+          >
+            投擲
+          </button>
+          <button
+            className={`font-bold pb-3 ${
+              activeTab === "その他"
+                ? "text-black dark:text-white border-b-[1.5px] border-black dark:border-white"
+                : "text-slate-400 dark:text-slate-500"
+            }`}
+            onClick={() => setActiveTab("その他")}
+          >
+            その他
+          </button>
+        </div>
+        <div className="mt-6">
+          {activeTab === "短距離" && (
+            <SprintsMemberTab
+              users={users.filter((user) => user.block === "Sprints")}
+            />
+          )}
+          {activeTab === "中距離" && (
+            <MiddleAndLongDistanceMemberTab
+              users={users.filter(
+                (user) => user.block === "MiddleAndLongDistance"
+              )}
+            />
+          )}
+          {activeTab === "跳躍" && (
+            <JumpsMemberTab
+              users={users.filter((user) => user.block === "Jumps")}
+            />
+          )}
+          {activeTab === "投擲" && (
+            <ThrowsMemberTab
+              users={users.filter((user) => user.block === "Throws")}
+            />
+          )}
+          {activeTab === "その他" && (
+            <OthersMemberTab
+              users={users.filter((user) => user.block === "Others")}
+            />
+          )}
+        </div>
       </div>
     </div>
   );
