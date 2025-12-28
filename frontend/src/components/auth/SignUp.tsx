@@ -48,7 +48,7 @@ const SignUp: React.FC = () => {
   };
 
   return (
-    <div>
+    <div className="mt-20">
       <form
         onSubmit={handleSubmit}
         className="mx-auto grid w-full max-w-md gap-4 rounded-2xl border border-gray-200 bg-white p-6 shadow-sm"

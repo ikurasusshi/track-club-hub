@@ -10,25 +10,28 @@ import NoHeaderLayout from "./components/layout/NoHeaderLayout";
 import UsersList from "./components/users/UsersList";
 import client from "./apolloClient";
 import { ApolloProvider } from "@apollo/client/react";
+import { ThemeProvider } from "./components/theme-provider";
 
 function App() {
   return (
-    <ApolloProvider client={client}>
-      <BrowserRouter>
-        <Routes>
-          <Route element={<DefaultLayout />}>
-            <Route path="/" element={<Main />} />
-            <Route path="/signup" element={<SignUp />} />
-            <Route path="/signin" element={<SignIn />} />
-            <Route path="/users" element={<UsersList />} />
-            <Route path="/users/:id" element={<UserDetailPage />} />
-          </Route>
-          <Route element={<NoHeaderLayout />}>
-            <Route path="*" element={<NotFound />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
-    </ApolloProvider>
+    <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+      <ApolloProvider client={client}>
+        <BrowserRouter>
+          <Routes>
+            <Route element={<DefaultLayout />}>
+              <Route path="/" element={<Main />} />
+              <Route path="/users" element={<UsersList />} />
+              <Route path="/users/:id" element={<UserDetailPage />} />
+            </Route>
+            <Route element={<NoHeaderLayout />}>
+              <Route path="/signup" element={<SignUp />} />
+              <Route path="/signin" element={<SignIn />} />
+              <Route path="*" element={<NotFound />} />
+            </Route>
+          </Routes>
+        </BrowserRouter>
+      </ApolloProvider>
+    </ThemeProvider>
   );
 }
 
