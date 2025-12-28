@@ -12,7 +12,7 @@ const BLOCKS = [
 ] as const;
 
 const UsersList = () => {
-  const { loading, error, data } = useQuery<{ users: User[] }>(GET_USERS);
+  const { loading, error, data } = useQuery<{ getUsers: User[] }>(GET_USERS);
 
   if (loading) {
     return (
@@ -32,7 +32,7 @@ const UsersList = () => {
     );
   }
 
-  const users = data?.users || [];
+  const users = data?.getUsers || [];
 
   // ブロックごとにユーザーをグループ化
   const usersByBlock = BLOCKS.map((block) => ({
@@ -45,7 +45,10 @@ const UsersList = () => {
       <h1 className="mb-8 text-3xl font-bold">部員一覧</h1>
       <div className="space-y-8">
         {usersByBlock.map((block) => (
-          <div key={block.key} className="rounded-lg border bg-white p-6 shadow-sm dark:bg-gray-800 dark:border-gray-700">
+          <div
+            key={block.key}
+            className="rounded-lg border bg-white p-6 shadow-sm dark:bg-gray-800 dark:border-gray-700"
+          >
             <h2 className="mb-4 text-xl font-semibold text-gray-900 dark:text-white">
               {block.label}
               <span className="ml-2 text-sm font-normal text-gray-500 dark:text-gray-400">
@@ -53,7 +56,9 @@ const UsersList = () => {
               </span>
             </h2>
             {block.users.length === 0 ? (
-              <p className="text-gray-500 dark:text-gray-400">該当する部員はいません</p>
+              <p className="text-gray-500 dark:text-gray-400">
+                該当する部員はいません
+              </p>
             ) : (
               <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
                 {block.users.map((user) => (
