@@ -5,13 +5,11 @@ import type { User } from "../../types/user";
 import { SIGN_IN, SIGN_UP } from "../../mutations/authMutations";
 import type { SignInResponse } from "../../types/signInResponse";
 
-const BLOCKS = [
-  "Sprints",
-  "MiddleAndLongDistance",
-  "Jumps",
-  "Throws",
-  "Others",
-] as const;
+const BLOCKS = ["短距離", "中距離", "跳躍", "投擲", "その他"] as const;
+
+const GRADE = ["1年", "2年", "3年", "4年", "院生"] as const;
+
+type Grade = (typeof GRADE)[number];
 
 type Block = (typeof BLOCKS)[number];
 
@@ -19,7 +17,8 @@ const SignUp: React.FC = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [block, setBlock] = useState<Block>("Sprints");
+  const [block, setBlock] = useState<Block>("短距離");
+  const [grade, setGrade] = useState<Grade>("1年");
   const [signUp] = useMutation<{ createUser: User }>(SIGN_UP);
   const [signIn] = useMutation<SignInResponse>(SIGN_IN);
   const navigate = useNavigate();
@@ -66,6 +65,34 @@ const SignUp: React.FC = () => {
           />
         </label>
         <label className="grid gap-1.5">
+          <span className="text-sm font-medium text-gray-700">学年</span>
+          <select
+            value={grade}
+            onChange={(e) => setGrade(e.target.value as Grade)}
+            className="h-11 w-full rounded-lg border border-gray-300 bg-white px-3 text-gray-900 outline-none focus:border-gray-900 focus:ring-2 focus:ring-gray-200"
+          >
+            {GRADE.map((b) => (
+              <option key={b} value={b}>
+                {b}
+              </option>
+            ))}
+          </select>
+        </label>
+        <label className="grid gap-1.5">
+          <span className="text-sm font-medium text-gray-700">ブロック</span>
+          <select
+            value={block}
+            onChange={(e) => setBlock(e.target.value as Block)}
+            className="h-11 w-full rounded-lg border border-gray-300 bg-white px-3 text-gray-900 outline-none focus:border-gray-900 focus:ring-2 focus:ring-gray-200"
+          >
+            {BLOCKS.map((b) => (
+              <option key={b} value={b}>
+                {b}
+              </option>
+            ))}
+          </select>
+        </label>
+        <label className="grid gap-1.5">
           <span className="text-sm font-medium text-gray-700">
             メールアドレス
           </span>
@@ -93,20 +120,6 @@ const SignUp: React.FC = () => {
               パスワードは８文字以上にしてください
             </small>
           )}
-        </label>
-        <label className="grid gap-1.5">
-          <span className="text-sm font-medium text-gray-700">ブロック</span>
-          <select
-            value={block}
-            onChange={(e) => setBlock(e.target.value as Block)}
-            className="h-11 w-full rounded-lg border border-gray-300 bg-white px-3 text-gray-900 outline-none focus:border-gray-900 focus:ring-2 focus:ring-gray-200"
-          >
-            {BLOCKS.map((b) => (
-              <option key={b} value={b}>
-                {b}
-              </option>
-            ))}
-          </select>
         </label>
         <button
           type="submit"
