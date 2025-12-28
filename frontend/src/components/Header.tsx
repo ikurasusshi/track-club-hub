@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { ModeToggle } from "./mode-toggle";
 
 const Header = () => {
   return (
@@ -17,6 +18,7 @@ const Header = () => {
           <Link to="/users" className="text-white hover:font-bold">
             部員
           </Link>
+          <ModeToggle />
           <Link to="/users/:id" className="text-white hover:font-bold">
             <img
               src="../../public/kkrn_icon_user_1.png"
