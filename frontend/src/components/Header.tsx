@@ -1,8 +1,9 @@
+import { UsersRound } from "lucide-react";
+import { House } from "lucide-react";
 import { Link } from "react-router-dom";
 import { ModeToggle } from "./mode-toggle";
 import { Button } from "./ui/button";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { User } from "lucide-react";
+import { UserMenu } from "./users/UserMenu";
 
 const Header = () => {
   return (
@@ -23,24 +24,19 @@ const Header = () => {
         <nav className="flex space-x-6 font-medium items-center justify-between">
           <ModeToggle />
           <Button variant="ghost" asChild>
+            <Link to="/" className="text-black dark:text-white hover:font-bold">
+              <House />
+            </Link>
+          </Button>
+          <Button variant="ghost" asChild>
             <Link
               to="/users"
               className="text-black dark:text-white hover:font-bold"
             >
-              <User />
+              <UsersRound />
             </Link>
           </Button>
-          <Button variant="ghost" asChild className="rounded-full">
-            <Link to="/users">
-              <Avatar>
-                <AvatarImage
-                  src="../../public/kkrn_icon_user_1.png"
-                  alt="@shadcn"
-                />
-                <AvatarFallback>CN</AvatarFallback>
-              </Avatar>
-            </Link>
-          </Button>
+          <UserMenu />
         </nav>
       </div>
     </header>
