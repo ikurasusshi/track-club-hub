@@ -18,12 +18,12 @@ function App() {
         <Routes>
           <Route element={<DefaultLayout />}>
             <Route path="/" element={<Main />} />
-            <Route path="/signup" element={<SignUp />} />
-            <Route path="/signin" element={<SignIn />} />
             <Route path="/users" element={<UsersList />} />
             <Route path="/users/:id" element={<UserDetailPage />} />
           </Route>
           <Route element={<NoHeaderLayout />}>
+            <Route path="/signup" element={<SignUp />} />
+            <Route path="/signin" element={<SignIn />} />
             <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>

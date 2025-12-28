@@ -1,1 +1,5 @@
 @import "tailwindcss";
+
+body {
+  @apply bg-[rgb(14,29,51)] min-h-screen;
+}

@@ -2,11 +2,11 @@ import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
-    <header className="bg-green-500 border-b border-gray-200 shadow-sm">
+    <header className="bg-[rgb(14,29,51)]">
       <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
         {/* ロゴ部分 */}
         <div className="text-xl font-bold text-white">
-          <Link to="/">MyApp</Link>
+          <Link to="/">ClubHub</Link>
         </div>
 
         {/* ナビゲーション */}
