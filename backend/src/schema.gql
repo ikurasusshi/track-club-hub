@@ -42,6 +42,7 @@ type Query {
   getCompetitionReports: [CompetitionReport!]!
   getMyCompetitionReports(userId: Int!): [CompetitionReport!]!
   getUser(email: String!): User
+  getUsers: [User!]!
 }
 
 type Mutation {

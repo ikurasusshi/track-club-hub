@@ -18,6 +18,12 @@ export class UserResolver {
     return await this.userService.getUser(getUserArgs.email);
   }
 
+  @Query(() => [UserModel])
+  @UseGuards(JwtAuthGuard)
+  async getUsers(): Promise<User[] | null> {
+    return await this.userService.getUsers();
+  }
+
   @Mutation(() => UserModel)
   async createUser(
     @Args('createUserInput') createUserInput: CreateUserInput,

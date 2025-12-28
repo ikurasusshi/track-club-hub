@@ -14,6 +14,10 @@ export class UserService {
     });
   }
 
+  async getUsers(): Promise<User[] | null> {
+    return await this.prismaService.user.findMany();
+  }
+
   async createUser(createUserInput: CreateUserInput): Promise<User> {
     const { name, email, password, block } = createUserInput;
     const hashedPassword = await bcrypt.hash(password, 10);
