@@ -1,5 +1,5 @@
 import { Field, InputType } from '@nestjs/graphql';
-import { Block } from '@prisma/client';
+import { Block, Grade } from '@prisma/client';
 import { IsEmail, IsEnum, IsNotEmpty, MinLength } from 'class-validator';
 
 @InputType()
@@ -20,4 +20,9 @@ export class CreateUserInput {
   @IsNotEmpty()
   @IsEnum(Block)
   block: Block;
+
+  @Field()
+  @IsNotEmpty()
+  @IsEnum(Grade)
+  grade: Grade;
 }

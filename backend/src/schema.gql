@@ -28,6 +28,7 @@ type User {
   name: String!
   email: String!
   block: String!
+  grade: String!
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -75,6 +76,7 @@ input CreateUserInput {
   email: String!
   password: String!
   block: String!
+  grade: String!
 }
 
 input SignInInput {

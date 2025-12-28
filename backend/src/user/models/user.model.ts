@@ -1,5 +1,5 @@
 import { Field, HideField, Int, ObjectType } from '@nestjs/graphql';
-import { Block } from '@prisma/client';
+import { Block, Grade } from '@prisma/client';
 
 @ObjectType()
 export class User {
@@ -17,6 +17,9 @@ export class User {
 
   @Field()
   block: Block;
+
+  @Field()
+  grade: Grade;
 
   @Field()
   createdAt: Date;
