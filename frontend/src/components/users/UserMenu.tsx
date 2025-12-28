@@ -45,7 +45,7 @@ export function UserMenu() {
             onClick={handleLogout}
             className="text-red-500 hover:text-red-500"
           >
-            Log out
+            ログアウト
           </Button>
         </DropdownMenuItem>
       </DropdownMenuContent>
