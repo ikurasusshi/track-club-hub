@@ -1,31 +1,46 @@
 import { Link } from "react-router-dom";
 import { ModeToggle } from "./mode-toggle";
+import { Button } from "./ui/button";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { User } from "lucide-react";
 
 const Header = () => {
   return (
-    <header className="bg-[rgb(14,29,51)]">
+    <header className="bg-white dark:bg-[rgb(14,29,51)]">
       <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
         {/* ロゴ部分 */}
-        <div className="text-xl font-bold text-white">
-          <Link to="/">ClubHub</Link>
+        <div>
+          <Button
+            variant="ghost"
+            asChild
+            className="text-xl font-bold text-black dark:text-white"
+          >
+            <Link to="/">ClubHub</Link>
+          </Button>
         </div>
 
         {/* ナビゲーション */}
         <nav className="flex space-x-6 font-medium items-center justify-between">
-          <Link to="/" className="text-white hover:font-bold">
-            ホーム
-          </Link>
-          <Link to="/users" className="text-white hover:font-bold">
-            部員
-          </Link>
           <ModeToggle />
-          <Link to="/users/:id" className="text-white hover:font-bold">
-            <img
-              src="../../public/kkrn_icon_user_1.png"
-              alt="アイコン"
-              className="w-10 h-10 transition-transform duration-200 hover:scale-110"
-            />
-          </Link>
+          <Button variant="ghost" asChild>
+            <Link
+              to="/users"
+              className="text-black dark:text-white hover:font-bold"
+            >
+              <User />
+            </Link>
+          </Button>
+          <Button variant="ghost" asChild className="rounded-full">
+            <Link to="/users">
+              <Avatar>
+                <AvatarImage
+                  src="../../public/kkrn_icon_user_1.png"
+                  alt="@shadcn"
+                />
+                <AvatarFallback>CN</AvatarFallback>
+              </Avatar>
+            </Link>
+          </Button>
         </nav>
       </div>
     </header>

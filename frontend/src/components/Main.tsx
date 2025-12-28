@@ -11,22 +11,34 @@ const Main = () => {
     <div className="">
       <div className="space-x-6 border-b-[0.5px] border-slate-700">
         <button
-          className="ml-43 text-white font-bold mr-15 border-b-[1.5px] border-white pb-3"
+          className={`ml-43 font-bold mr-15 pb-3 ${
+            activeTab === "基本情報"
+              ? "text-black dark:text-white border-b-[1.5px] border-black dark:border-white"
+              : "text-slate-400 dark:text-slate-500"
+          }`}
           onClick={() => setActiveTab("基本情報")}
         >
-          基本情報
+          Info
         </button>
         <button
-          className="text-white font-bold mr-15 border-b-[1.5px] border-white pb-3"
+          className={`font-bold mr-15 pb-3 ${
+            activeTab === "欠席連絡"
+              ? "text-black dark:text-white border-b-[1.5px] border-black dark:border-white"
+              : "text-slate-400 dark:text-slate-500"
+          }`}
           onClick={() => setActiveTab("欠席連絡")}
         >
-          欠席連絡
+          Absence
         </button>
         <button
-          className="text-white font-bold border-b-[1.5px] border-white pb-3"
+          className={`font-bold pb-3 ${
+            activeTab === "試合報告"
+              ? "text-black dark:text-white border-b-[1.5px] border-black dark:border-white"
+              : "text-slate-400 dark:text-slate-500"
+          }`}
           onClick={() => setActiveTab("試合報告")}
         >
-          試合報告
+          Reports
         </button>
       </div>
       <div className="mt-6">
