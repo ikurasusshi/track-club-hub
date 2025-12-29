@@ -15,6 +15,7 @@ export const SIGN_UP = gql`
       name
       email
       block
+      grade
     }
   }
 `;
