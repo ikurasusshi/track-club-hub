@@ -51,6 +51,7 @@ type Mutation {
   createCompetitionReport(createCompetitionReportInput: CreateCompetitionReportInput!): CompetitionReport!
   updateCompetitionReport(updateCompetitionReportInput: UpdateCompetitionReportInput!): CompetitionReport!
   createUser(createUserInput: CreateUserInput!): User!
+  updateUser(updateUserInput: UpdateUserInput!): User!
   signIn(signInInput: SignInInput!): SignInReponse!
 }
 
@@ -77,6 +78,12 @@ input CreateUserInput {
   password: String!
   block: String!
   grade: String!
+}
+
+input UpdateUserInput {
+  id: Int!
+  grade: String!
+  block: String!
 }
 
 input SignInInput {

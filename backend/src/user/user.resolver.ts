@@ -7,6 +7,7 @@ import { User } from '@prisma/client';
 import { CreateUserInput } from './dto/createUser.input';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 import { UseGuards } from '@nestjs/common';
+import { UpdateUserInput } from './dto/updateUserInupt';
 
 @Resolver()
 export class UserResolver {
@@ -29,5 +30,12 @@ export class UserResolver {
     @Args('createUserInput') createUserInput: CreateUserInput,
   ): Promise<User> {
     return await this.userService.createUser(createUserInput);
+  }
+
+  @Mutation(() => UserModel)
+  async updateUser(
+    @Args('updateUserInput') updateUserInput: UpdateUserInput,
+  ): Promise<User> {
+    return await this.userService.updateUser(updateUserInput);
   }
 }

@@ -3,6 +3,7 @@ import { User } from '@prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateUserInput } from './dto/createUser.input';
 import * as bcrypt from 'bcrypt';
+import { UpdateUserInput } from './dto/updateUserInupt';
 
 @Injectable()
 export class UserService {
@@ -28,6 +29,17 @@ export class UserService {
         password: hashedPassword,
         block,
         grade,
+      },
+    });
+  }
+
+  async updateUser(updateUserInput: UpdateUserInput): Promise<User> {
+    const { id, grade, block } = updateUserInput;
+    return await this.prismaService.user.update({
+      where: { id },
+      data: {
+        grade,
+        block,
       },
     });
   }
