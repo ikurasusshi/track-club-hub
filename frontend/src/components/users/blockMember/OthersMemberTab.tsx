@@ -19,7 +19,12 @@ export default function OthersMemberTab({ users }: OthersMemberTabProps) {
   return (
     <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
       {users.map((user) => (
-        <UserCard key={user.id} id={user.id} name={user.name} grade={2} />
+        <UserCard
+          key={user.id}
+          id={user.id}
+          name={user.name}
+          grade={user.grade}
+        />
       ))}
     </div>
   );
