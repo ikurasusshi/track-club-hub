@@ -4,7 +4,11 @@ import { ModeToggle } from "./mode-toggle";
 import { Button } from "./ui/button";
 import { UserMenu } from "./users/UserMenu";
 
-const Header = () => {
+interface HeaderProps {
+  simple?: boolean;
+}
+
+const Header = ({ simple = false }: HeaderProps) => {
   return (
     <header className="bg-white dark:bg-[rgb(14,29,51)]">
       <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
@@ -20,23 +24,28 @@ const Header = () => {
         </div>
 
         {/* ナビゲーション */}
-        <nav className="flex space-x-6 font-medium items-center justify-between">
-          <ModeToggle />
-          <Button variant="ghost" asChild>
-            <Link to="/" className="text-black dark:text-white hover:font-bold">
-              <House />
-            </Link>
-          </Button>
-          <Button variant="ghost" asChild>
-            <Link
-              to="/users"
-              className="text-black dark:text-white hover:font-bold"
-            >
-              <UsersRound />
-            </Link>
-          </Button>
-          <UserMenu />
-        </nav>
+        {!simple && (
+          <nav className="flex space-x-6 font-medium items-center justify-between">
+            <ModeToggle />
+            <Button variant="ghost" asChild>
+              <Link
+                to="/"
+                className="text-black dark:text-white hover:font-bold"
+              >
+                <House />
+              </Link>
+            </Button>
+            <Button variant="ghost" asChild>
+              <Link
+                to="/users"
+                className="text-black dark:text-white hover:font-bold"
+              >
+                <UsersRound />
+              </Link>
+            </Button>
+            <UserMenu />
+          </nav>
+        )}
       </div>
     </header>
   );
