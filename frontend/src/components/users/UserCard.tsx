@@ -1,10 +1,12 @@
 import { Link } from "react-router-dom";
 import { Card } from "../ui/card";
+import type { Grade } from "../../types/user";
+import { formatGrade } from "../../utils/gradeFormatter";
 
 interface UserCardProps {
   id: number;
   name: string;
-  grade: number;
+  grade: Grade;
 }
 
 export default function UserCard({ id, name, grade }: UserCardProps) {
@@ -18,7 +20,7 @@ export default function UserCard({ id, name, grade }: UserCardProps) {
           <div className="flex flex-col flex-1 min-w-0">
             <h3 className="text-xs font-semibold truncate">{name}</h3>
             <span className="text-xs text-black  dark:text-white">
-              {grade}年
+              {formatGrade(grade)}
             </span>
           </div>
         </div>
