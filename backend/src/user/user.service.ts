@@ -34,10 +34,11 @@ export class UserService {
   }
 
   async updateUser(updateUserInput: UpdateUserInput): Promise<User> {
-    const { id, grade, block } = updateUserInput;
+    const { id, name, grade, block } = updateUserInput;
     return await this.prismaService.user.update({
       where: { id },
       data: {
+        name,
         grade,
         block,
       },
