@@ -3,12 +3,17 @@ import { Link } from "react-router-dom";
 import { ModeToggle } from "./mode-toggle";
 import { Button } from "./ui/button";
 import { UserMenu } from "./users/UserMenu";
+import type { User } from "@/types/user";
 
 interface HeaderProps {
   simple?: boolean;
 }
 
 const Header = ({ simple = false }: HeaderProps) => {
+  // localStorageからユーザー情報を取得
+  const userStr = localStorage.getItem("user");
+  const user: User | null =
+    userStr && userStr !== "undefined" ? JSON.parse(userStr) : null;
   return (
     <header className="bg-white dark:bg-[rgb(14,29,51)]">
       <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
@@ -43,7 +48,7 @@ const Header = ({ simple = false }: HeaderProps) => {
                 <UsersRound />
               </Link>
             </Button>
-            <UserMenu />
+            {user && <UserMenu />}
           </nav>
         )}
       </div>
