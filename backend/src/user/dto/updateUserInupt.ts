@@ -9,6 +9,10 @@ export class UpdateUserInput {
 
   @Field()
   @IsNotEmpty()
+  name: string;
+
+  @Field()
+  @IsNotEmpty()
   grade: Grade;
 
   @Field()

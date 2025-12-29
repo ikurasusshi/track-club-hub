@@ -82,6 +82,7 @@ input CreateUserInput {
 
 input UpdateUserInput {
   id: Int!
+  name: String!
   grade: String!
   block: String!
 }
