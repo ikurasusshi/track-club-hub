@@ -44,4 +44,8 @@ export class UserService {
       },
     });
   }
+
+  async me(user: User): Promise<User> {
+    return user;
+  }
 }
