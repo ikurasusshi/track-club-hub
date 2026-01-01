@@ -43,7 +43,7 @@ const UsersList = () => {
             className={`ml-43 font-bold mr-15 pb-3 ${
               activeTab === "短距離"
                 ? "text-black dark:text-white border-b-[1.5px] border-black dark:border-white"
-                : "text-slate-400 dark:text-slate-500"
+                : "hover:text-black dark:hover:text-white duration-75 text-slate-400 dark:text-slate-500"
             }`}
             onClick={() => setActiveTab("短距離")}
           >
@@ -53,7 +53,7 @@ const UsersList = () => {
             className={`font-bold mr-15 pb-3 ${
               activeTab === "中距離"
                 ? "text-black dark:text-white border-b-[1.5px] border-black dark:border-white"
-                : "text-slate-400 dark:text-slate-500"
+                : "hover:text-black dark:hover:text-white duration-75 text-slate-400 dark:text-slate-500"
             }`}
             onClick={() => setActiveTab("中距離")}
           >
@@ -63,7 +63,7 @@ const UsersList = () => {
             className={`font-bold mr-15 pb-3 ${
               activeTab === "跳躍"
                 ? "text-black dark:text-white border-b-[1.5px] border-black dark:border-white"
-                : "text-slate-400 dark:text-slate-500"
+                : "hover:text-black dark:hover:text-white duration-75 text-slate-400 dark:text-slate-500"
             }`}
             onClick={() => setActiveTab("跳躍")}
           >
@@ -73,7 +73,7 @@ const UsersList = () => {
             className={`font-bold mr-15 pb-3 ${
               activeTab === "投擲"
                 ? "text-black dark:text-white border-b-[1.5px] border-black dark:border-white"
-                : "text-slate-400 dark:text-slate-500"
+                : "hover:text-black dark:hover:text-white duration-75 text-slate-400 dark:text-slate-500"
             }`}
             onClick={() => setActiveTab("投擲")}
           >
@@ -83,7 +83,7 @@ const UsersList = () => {
             className={`font-bold pb-3 ${
               activeTab === "その他"
                 ? "text-black dark:text-white border-b-[1.5px] border-black dark:border-white"
-                : "text-slate-400 dark:text-slate-500"
+                : "hover:text-black dark:hover:text-white duration-75 text-slate-400 dark:text-slate-500"
             }`}
             onClick={() => setActiveTab("その他")}
           >

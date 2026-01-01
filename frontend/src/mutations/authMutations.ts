@@ -26,3 +26,15 @@ export const SIGN_UP = gql`
     }
   }
 `;
+
+export const UPDATE_USER = gql`
+  mutation updateUser($updateUserInput: UpdateUserInput!) {
+    updateUser(updateUserInput: $updateUserInput) {
+      id
+      name
+      email
+      block
+      grade
+    }
+  }
+`;
