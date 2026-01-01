@@ -18,9 +18,11 @@ const SignIn: React.FC = () => {
       const result = await signIn({
         variables: { signInInput },
       });
-      console.log(result);
       if (result.data) {
         localStorage.setItem("token", result.data.signIn.accessToken);
+        if (result.data.signIn.user) {
+          localStorage.setItem("user", JSON.stringify(result.data.signIn.user));
+        }
       }
       localStorage.getItem("token") && navigate("/");
     } catch (err: any) {

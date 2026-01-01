@@ -12,6 +12,7 @@ import client from "./apolloClient";
 import { ApolloProvider } from "@apollo/client/react";
 import { ThemeProvider } from "./components/theme-provider";
 import AuthLayout from "./components/layout/AuthLayout";
+import MyProfilePage from "./components/users/MyProfilePage";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
               <Route path="/" element={<Main />} />
               <Route path="/users" element={<UsersList />} />
               <Route path="/users/:id" element={<UserDetailPage />} />
+              <Route path="/me" element={<MyProfilePage />} />
             </Route>
             <Route element={<AuthLayout />}>
               <Route path="/signup" element={<SignUp />} />
