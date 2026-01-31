@@ -2,11 +2,12 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type AttendanceReport {
+type User {
   id: Int!
-  date: DateTime!
-  status: String!
-  reason: String
+  name: String!
+  email: String!
+  block: String!
+  grade: String!
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -16,19 +17,19 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 """
 scalar DateTime
 
+type AttendanceReport {
+  id: Int!
+  date: DateTime!
+  status: String!
+  reason: String
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  user: User!
+}
+
 type CompetitionReport {
   id: Int!
   body: String!
-  createdAt: DateTime!
-  updatedAt: DateTime!
-}
-
-type User {
-  id: Int!
-  name: String!
-  email: String!
-  block: String!
-  grade: String!
   createdAt: DateTime!
   updatedAt: DateTime!
 }

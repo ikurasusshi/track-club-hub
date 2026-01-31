@@ -7,7 +7,7 @@ import { CreateAttendanceReportInput } from './dto/createAttendanceReport.input'
 export class AttendanceReportService {
   constructor(private readonly prismaService: PrismaService) {}
 
-  async getAttendanceReports(block?: string): Promise<AttendanceReport[]> {
+  async getAttendanceReports(block?: string) {
     return await this.prismaService.attendanceReport.findMany({
       where: block
         ? {
@@ -16,6 +16,9 @@ export class AttendanceReportService {
             },
           }
         : undefined,
+      include: {
+        user: true,
+      },
     });
   }
 

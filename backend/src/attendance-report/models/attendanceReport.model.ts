@@ -1,5 +1,6 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql';
 import { Status } from '@prisma/client';
+import { User } from '../../user/models/user.model';
 
 @ObjectType()
 export class AttendanceReport {
@@ -20,4 +21,7 @@ export class AttendanceReport {
 
   @Field()
   updatedAt: Date;
+
+  @Field(() => User)
+  user: User;
 }
