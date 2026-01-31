@@ -39,7 +39,7 @@ type SignInReponse {
 }
 
 type Query {
-  getAttendanceReports: [AttendanceReport!]!
+  getAttendanceReports(block: String): [AttendanceReport!]!
   getCompetitionReports: [CompetitionReport!]!
   getMyCompetitionReports(userId: Int!): [CompetitionReport!]!
   getUser(email: String!): User

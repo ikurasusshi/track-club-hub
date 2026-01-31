@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { AttendanceReport } from '@prisma/client';
+import { AttendanceReport, Block } from '@prisma/client';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateAttendanceReportInput } from './dto/createAttendanceReport.input';
 
@@ -7,8 +7,16 @@ import { CreateAttendanceReportInput } from './dto/createAttendanceReport.input'
 export class AttendanceReportService {
   constructor(private readonly prismaService: PrismaService) {}
 
-  async getAttendanceReports(): Promise<AttendanceReport[]> {
-    return await this.prismaService.attendanceReport.findMany();
+  async getAttendanceReports(block?: string): Promise<AttendanceReport[]> {
+    return await this.prismaService.attendanceReport.findMany({
+      where: block
+        ? {
+            user: {
+              block: block as Block,
+            },
+          }
+        : undefined,
+    });
   }
 
   async createAttendanceReport(

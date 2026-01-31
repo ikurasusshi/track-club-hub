@@ -23,3 +23,11 @@ export const ME = gql`
     }
   }
 `;
+
+export const GET_BLOCK = gql`
+  query {
+    me {
+      block
+    }
+  }
+`;
