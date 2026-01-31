@@ -232,7 +232,7 @@ const AbsenceReport = () => {
           <p>エラーが発生しました: {getAttendanceReportsError.message}</p>
         )}
         {filteredReportsByDate?.map((report: AttendanceReport) => (
-          <AttendanceReportCard key={report.id} report={report} user={report.user} />
+          <AttendanceReportCard key={report.id} report={report}/>
         ))}
         {!getAttendanceReportsLoading &&
           !getAttendanceReportsError &&

@@ -12,16 +12,15 @@ interface AttendanceReportCardProps {
     date: string;
     status: string;
     reason: string;
-  };
-  user?: {
-    id: number;
-    name: string;
+    user: {
+      id: number;
+      name: string;
+    }
   };
 }
 
 export default function AttendanceReportCard({
   report,
-  user
 }: AttendanceReportCardProps) {
   const getStatusLabel = (status: string) => {
     switch (status) {
@@ -39,7 +38,7 @@ export default function AttendanceReportCard({
       <Card className="w-xl">
         <CardHeader>
           <CardTitle>{getStatusLabel(report.status)}</CardTitle>
-          <CardDescription>{user?.name}</CardDescription>
+          <CardDescription>{report.user.name}</CardDescription>
         </CardHeader>
         <CardContent>{report.reason}</CardContent>
       </Card>
