@@ -29,6 +29,7 @@ type AttendanceReport {
 
 type CompetitionReport {
   id: Int!
+  competitionName: String!
   body: String!
   createdAt: DateTime!
   updatedAt: DateTime!
@@ -66,12 +67,14 @@ input CreateAttendanceReportInput {
 }
 
 input CreateCompetitionReportInput {
+  competitionName: String!
   body: String!
   userId: Int!
 }
 
 input UpdateCompetitionReportInput {
   id: Int!
+  competitionName: String!
   body: String!
 }
 

@@ -4,6 +4,7 @@ export const GET_COMPETITION_REPORTS = gql`
   query {
     getCompetitionReports {
       id
+      competitionName
       body
       user {
         id
@@ -17,6 +18,7 @@ export const GET_MY_COMPETITION_REPORTS = gql`
   query($userId: Int!) {
     getMyCompetitionReports(userId: $userId) {
       id
+      competitionName
       body
       user {
         id

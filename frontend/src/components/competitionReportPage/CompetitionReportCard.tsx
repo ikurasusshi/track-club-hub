@@ -3,23 +3,26 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../ui
 interface CompetitionReportCardProps {
   report: {
     id: number;
+    competitionName: string;
     body: string;
     user: {
       id: number;
       name: string;
-    }
+    } 
   }
 }
 
+
 export default function CompetitionReportCard({report}: CompetitionReportCardProps) {
+  console.log(report)
   return (
     <>
       <Card className="w-xl">
         <CardHeader>
-          <CardTitle>{report.user.name}</CardTitle>
-          <CardDescription></CardDescription>
+          <CardTitle>{report.competitionName}</CardTitle>
+          <CardDescription>{report.user.name}</CardDescription>
         </CardHeader>
-        <CardContent>{report.body}</CardContent>
+        <CardContent className="whitespace-pre-wrap">{report.body}</CardContent>
       </Card>
     </>
   )

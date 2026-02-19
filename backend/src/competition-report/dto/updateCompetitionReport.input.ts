@@ -7,6 +7,9 @@ export class UpdateCompetitionReportInput {
   id: number;
 
   @Field()
+  competitionName: string;
+
+  @Field()
   @IsNotEmpty()
   @IsOptional()
   body?: string;

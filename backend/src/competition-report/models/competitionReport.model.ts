@@ -7,6 +7,9 @@ export class CompetitionReport {
   id: number;
 
   @Field()
+  competitionName: string;
+
+  @Field()
   body: string;
 
   @Field()

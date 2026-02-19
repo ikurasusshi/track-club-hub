@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Button } from "../ui/button";
+import { Input } from "../ui/input";
 import { Textarea } from "../ui/textarea";
 import { useMutation, useQuery } from "@apollo/client/react";
 import { GET_COMPETITION_REPORTS, GET_MY_COMPETITION_REPORTS } from "@/queries/competitionReportQueries";
@@ -10,6 +11,7 @@ import type { User } from "@/types/user";
 
 interface CompetitionReport {
   id: number;
+  competitionName: string;
   body: string;
   user: {
     id: number;
@@ -23,6 +25,7 @@ interface GetCompetitionReportsData {
 
 const CompetitionReport = () => {
   const [isFormVisible, setIsFormVisible] = useState(false);
+  const [competitionName, setCompetitionName] = useState("")
   const [body, setBody] = useState("");
   const {
       loading: meLoading,
@@ -58,6 +61,7 @@ const CompetitionReport = () => {
       await createCompetitionReport({
         variables: {
           createCompetitionReportInput: {
+            competitionName,
             body,
             userId: meData?.me.id,
           },
@@ -134,8 +138,17 @@ const CompetitionReport = () => {
           onSubmit={handleSubmit} 
           className="mb-8 ml-40 p-6 border rounded-lg bg-card w-100 h-100"
         >
-          <h2>試合報告をする</h2>
+          <h2 className="text-xl font-bold pb-4">試合報告をする</h2>
           <div className="space-y-4">
+            <div>
+              <Input
+                id="competitionName"
+                placeholder="試合名を入力してください"
+                onChange={(e) => setCompetitionName(e.target.value)}
+                value={competitionName}
+                required
+              />
+            </div>
             <div>
               <Textarea
                 id="matchReport"

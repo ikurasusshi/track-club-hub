@@ -150,7 +150,7 @@ const AttendanceReport = () => {
           onSubmit={handleSubmit}
           className="mb-8 ml-40 m p-6 border rounded-lg bg-card w-100 h-100"
         >
-          <h2 className="text-xl font-bold mb-4">欠席連絡を投稿</h2>
+          <h2 className="text-xl font-bold pb-4">欠席連絡を投稿</h2>
 
           <div className="space-y-4">
             <div>

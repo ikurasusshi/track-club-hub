@@ -24,18 +24,18 @@ export class CompetitionReportService {
   async createCompetitionReport(
     createCompetitionReportInput: CreateCompetitionReportInput,
   ): Promise<CompetitionReport> {
-    const { body, userId } = createCompetitionReportInput;
+    const { competitionName, body, userId } = createCompetitionReportInput;
     return await this.prismaService.competitionReport.create({
-      data: { body, userId },
+      data: { competitionName, body, userId },
     });
   }
 
   async updateCompetitionReport(
     updateCompetitionReportInput: UpdateCompetitionReportInput,
   ): Promise<CompetitionReport> {
-    const { id, body } = updateCompetitionReportInput;
+    const { id, competitionName, body } = updateCompetitionReportInput;
     return await this.prismaService.competitionReport.update({
-      data: { id, body },
+      data: { id, competitionName, body },
       where: { id },
     });
   }
