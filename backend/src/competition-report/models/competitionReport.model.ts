@@ -1,4 +1,5 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql';
+import { User } from '../../user/models/user.model';
 
 @ObjectType()
 export class CompetitionReport {
@@ -13,4 +14,7 @@ export class CompetitionReport {
 
   @Field()
   updatedAt: Date;
+
+  @Field(() => User)
+  user: User;
 }

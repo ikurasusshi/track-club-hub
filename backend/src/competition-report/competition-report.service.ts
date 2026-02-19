@@ -9,12 +9,15 @@ export class CompetitionReportService {
   constructor(private readonly prismaService: PrismaService) {}
 
   async getCompetitionReports(): Promise<CompetitionReport[]> {
-    return await this.prismaService.competitionReport.findMany();
+    return await this.prismaService.competitionReport.findMany({
+      include: { user: true },
+    });
   }
 
   async getMyCompetitionReports(userId: number): Promise<CompetitionReport[]> {
     return await this.prismaService.competitionReport.findMany({
       where: { userId },
+      include: { user: true },
     });
   }
 

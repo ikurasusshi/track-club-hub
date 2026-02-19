@@ -32,6 +32,7 @@ type CompetitionReport {
   body: String!
   createdAt: DateTime!
   updatedAt: DateTime!
+  user: User!
 }
 
 type SignInReponse {
