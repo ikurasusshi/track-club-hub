@@ -5,6 +5,10 @@ import { IsNotEmpty } from 'class-validator';
 export class CreateCompetitionReportInput {
   @Field()
   @IsNotEmpty()
+  competitionName: string;
+
+  @Field()
+  @IsNotEmpty()
   body: string;
 
   @Field(() => Int)

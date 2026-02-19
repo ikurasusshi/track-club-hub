@@ -1,6 +1,6 @@
 import { useState } from "react";
-import AbsenceReport from "./tabs/AbsenceReport";
-import MatchReport from "./tabs/MatchReport";
+import AttendanceReport from "./attendanceReportPage/AttendanceReport";
+import CompetitionReport from "./competitionReportPage/CompetitionReport";
 
 type TabTypes = "欠席連絡" | "試合報告";
 
@@ -31,8 +31,8 @@ const Main = () => {
         </button>
       </div>
       <div className="mt-6">
-        {activeTab === "欠席連絡" && <AbsenceReport />}
-        {activeTab === "試合報告" && <MatchReport />}
+        {activeTab === "欠席連絡" && <AttendanceReport />}
+        {activeTab === "試合報告" && <CompetitionReport />}
       </div>
     </div>
   );

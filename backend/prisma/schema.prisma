@@ -35,8 +35,9 @@ model AttendanceReport {
 }
 
 model CompetitionReport {
-  id        Int      @id @default(autoincrement())
-  body      String
+  id              Int      @id @default(autoincrement())
+  competitionName String   @db.VarChar(255)
+  body            String
   createdAt DateTime @default(now()) @db.Timestamp(0)
   updatedAt DateTime @updatedAt @db.Timestamp(0)
   userId    Int

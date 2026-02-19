@@ -9,30 +9,33 @@ export class CompetitionReportService {
   constructor(private readonly prismaService: PrismaService) {}
 
   async getCompetitionReports(): Promise<CompetitionReport[]> {
-    return await this.prismaService.competitionReport.findMany();
+    return await this.prismaService.competitionReport.findMany({
+      include: { user: true },
+    });
   }
 
   async getMyCompetitionReports(userId: number): Promise<CompetitionReport[]> {
     return await this.prismaService.competitionReport.findMany({
       where: { userId },
+      include: { user: true },
     });
   }
 
   async createCompetitionReport(
     createCompetitionReportInput: CreateCompetitionReportInput,
   ): Promise<CompetitionReport> {
-    const { body, userId } = createCompetitionReportInput;
+    const { competitionName, body, userId } = createCompetitionReportInput;
     return await this.prismaService.competitionReport.create({
-      data: { body, userId },
+      data: { competitionName, body, userId },
     });
   }
 
   async updateCompetitionReport(
     updateCompetitionReportInput: UpdateCompetitionReportInput,
   ): Promise<CompetitionReport> {
-    const { id, body } = updateCompetitionReportInput;
+    const { id, competitionName, body } = updateCompetitionReportInput;
     return await this.prismaService.competitionReport.update({
-      data: { id, body },
+      data: { id, competitionName, body },
       where: { id },
     });
   }

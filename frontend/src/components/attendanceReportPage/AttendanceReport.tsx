@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useMutation, useQuery } from "@apollo/client/react";
-import AttendanceReportCard from "../attendanceReportCard";
+import AttendanceReportCard from "./AttendanceReportCard";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { Textarea } from "../ui/textarea";
@@ -50,7 +50,7 @@ interface GetAttendanceReportsData {
   getAttendanceReports: AttendanceReport[];
 }
 
-const AbsenceReport = () => {
+const AttendanceReport = () => {
   const [isFormVisible, setIsFormVisible] = useState(false);
   const [status, setStatus] = useState<AttendanceStatus>("ABSENT");
   const [reason, setReason] = useState("");
@@ -124,8 +124,8 @@ const AbsenceReport = () => {
       setReason("");
       setIsFormVisible(false);
     } catch (err) {
-      console.error("欠席連絡の投稿に失敗しました:", err);
-      alert("欠席連絡の投稿に失敗しました");
+      console.error("欠席連絡の作成に失敗しました:", err);
+      alert("欠席連絡の作成に失敗しました");
     }
   };
   //  日付によるフィルター処理
@@ -150,7 +150,7 @@ const AbsenceReport = () => {
           onSubmit={handleSubmit}
           className="mb-8 ml-40 m p-6 border rounded-lg bg-card w-100 h-100"
         >
-          <h2 className="text-xl font-bold mb-4">欠席連絡を投稿</h2>
+          <h2 className="text-xl font-bold pb-4">欠席連絡を投稿</h2>
 
           <div className="space-y-4">
             <div>
@@ -248,4 +248,4 @@ const AbsenceReport = () => {
   );
 };
 
-export default AbsenceReport;
+export default AttendanceReport;

@@ -38,7 +38,7 @@ const UsersList = () => {
     <div>
       <div className="">
         <div className="bg-white dark:bg-darkTheme space-x-6 border-b-[0.5px] border-slate-700">
-          <h1 className="font-bold text-3xl my-3">部員一覧</h1>
+          <h1 className="font-bold text-3xl my-10">部員一覧</h1>
           <button
             className={`ml-43 font-bold mr-15 pb-3 ${
               activeTab === "短距離"
