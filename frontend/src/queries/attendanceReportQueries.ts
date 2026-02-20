@@ -14,3 +14,11 @@ export const GET_ATTENDANCE_REPORTS = gql`
     }
   }
 `;
+
+export const GET_ABSENT_DATES = gql`
+  query getAbsentDates($userId: Int!) {
+    getAbsentDates(userId: $userId) {
+      date
+    }
+  }
+`;
