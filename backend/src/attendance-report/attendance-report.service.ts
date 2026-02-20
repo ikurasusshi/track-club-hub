@@ -22,6 +22,18 @@ export class AttendanceReportService {
     });
   }
 
+  async getAbsentDates(userId: number, since: Date) {
+    return await this.prismaService.attendanceReport.findMany({
+      where: {
+        userId,
+        date: { gte: since },
+        status: 'ABSENT',
+      },
+      select: { date: true },
+      orderBy: { date: 'asc' },
+    });
+  }
+
   async createAttendanceReport(
     createAttendanceReportInput: CreateAttendanceReportInput,
   ): Promise<AttendanceReport> {

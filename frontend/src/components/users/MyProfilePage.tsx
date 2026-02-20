@@ -14,6 +14,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../ui/select";
+import ActivityHistory from "./ActivityHistory";
 
 const MyProfilePage = () => {
   const [changeMode, setChangeMode] = useState(false);
@@ -109,7 +110,7 @@ const MyProfilePage = () => {
 
   return (
     <div className="max-w-2xl mx-auto p-6">
-      <h1 className="text-3xl font-bold mb-6">マイプロフィール</h1>
+      <h1 className="text-3xl font-bold pb-4">MyProfile</h1>
       <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
         {changeMode ? (
           <form className="space-y-4">
@@ -237,6 +238,9 @@ const MyProfilePage = () => {
             </div>
           </div>
         )}
+      </div>
+      <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6 mt-6">
+        <ActivityHistory userId={user.id} />
       </div>
     </div>
   );
